@@ -37,8 +37,8 @@ class AppServiceProvider extends ServiceProvider
         \Illuminate\Support\Collection::macro('lists', function ($a, $b = null) {
             return collect($this->items)->pluck($a, $b);
         });
-        if ($this->app->environment('local', 'testing')) {
-            $this->app->register(DuskServiceProvider::class);
+        if (!$this->app->environment('production')) {
+        $this->app->register('Laravel\Dusk\DuskServiceProvider');
         }
 
     }
